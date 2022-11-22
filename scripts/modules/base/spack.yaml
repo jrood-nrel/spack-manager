@@ -2,7 +2,6 @@ spack:
   include:
   - packages.yaml
   - compilers.yaml
-  - modules.yaml
   - config.yaml
   specs:
   - gcc@8.4.0
@@ -13,3 +12,15 @@ spack:
       variants: [build_type=Release]
     gcc:
       variants: [~bootstrap ~profiled +strip]
+  modules:
+    default:
+      tcl:
+        projections:
+          all: 'base/{compiler.name}-{compiler.version}/{name}/{version}/{hash:4}'
+        hash_length: 0
+        all:
+          conflict:
+            - '{name}'
+          environment:
+            set:
+              '{name}_ROOT_DIR': '{prefix}'

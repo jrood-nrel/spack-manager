@@ -2,7 +2,6 @@ spack:
   include:
   - packages.yaml
   - compilers.yaml
-  - modules.yaml
   - config.yaml
   specs:
   - binutils
@@ -31,3 +30,15 @@ spack:
       variants: [build_type=Release]
     gcc:
       variants: [build_type=Release +profiled +strip]
+  modules:
+    default:
+      tcl:
+        projections:
+          all: 'compilers/{compiler.name}-{compiler.version}/{name}/{version}/{hash:4}'
+        hash_length: 0
+        all:
+          conflict:
+            - '{name}'
+          environment:
+            set:
+              '{name}_ROOT_DIR': '{prefix}'
