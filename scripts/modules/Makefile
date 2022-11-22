@@ -1,5 +1,6 @@
 export SPACK_USER_CONFIG_PATH=$(CURDIR)/.spack
 export SPACK_USER_CACHE_PATH=$(CURDIR)/.spack
+unexport SPACK_DISABLE_LOCAL_CONFIG
 
 .SUFFIXES:
 
@@ -8,16 +9,16 @@ export SPACK_USER_CACHE_PATH=$(CURDIR)/.spack
 all: software/generated/env
 
 clean:
-	rm -f base/spack.mk base/spack.lock base/compilers.yaml base/modules.yaml base/config.yaml base/packages.yaml base/generated base/.spack-env
-	rm -f compilers/spack.mk compilers/spack.lock compilers/compilers.yaml compilers/modules.yaml compilers/config.yaml compilers/packages.yaml compilers/generated compilers/.spack-env
-	rm -f software/spack.mk software/spack.lock software/compilers.yaml software/modules.yaml software/config.yaml software/packages.yaml software/generated software/.spack-env
+	rm -rf base/spack.mk base/spack.lock base/compilers.yaml base/modules.yaml base/config.yaml base/packages.yaml base/generated base/.spack-env
+	rm -rf compilers/spack.mk compilers/spack.lock compilers/compilers.yaml compilers/modules.yaml compilers/config.yaml compilers/packages.yaml compilers/generated compilers/.spack-env
+	rm -rf software/spack.mk software/spack.lock software/compilers.yaml software/modules.yaml software/config.yaml software/packages.yaml software/generated software/.spack-env
 
 # Base compiler installation
 base/compilers.yaml:
 				SPACK_USER_CONFIG_PATH=base spack compiler find --scope=user
 
 base/modules.yaml:
-				SPACK_USER_CONFIG_PATH=base spack config --scope=user add modules:default:tcl:projections:all:'base/{compiler.name}-{compiler.version}/{name}/{version}/{hash:4}'
+				SPACK_USER_CONFIG_PATH=base spack config --scope=user add modules:default:tcl:projections:all:"base/{compiler.name}-{compiler.version}/{name}/{version}/{hash:4}"
 
 base/config.yaml:
 				SPACK_USER_CONFIG_PATH=base spack config --scope=user add config:install_tree:root:$(CURDIR)/base_store
@@ -36,7 +37,7 @@ compilers/compilers.yaml: base/generated/env
 				SPACK_USER_CONFIG_PATH=compilers spack compiler find --scope=user $$(spack -e base find --format '{prefix}' gcc)
 
 compilers/modules.yaml:
-				SPACK_USER_CONFIG_PATH=compilers spack config --scope=user add modules:default:tcl:projections:all:'compilers/{compiler.name}-{compiler.version}/{name}/{version}/{hash:4}'
+				SPACK_USER_CONFIG_PATH=compilers spack config --scope=user add modules:default:tcl:projections:all:"compilers/{compiler.name}-{compiler.version}/{name}/{version}/{hash:4}"
 
 compilers/config.yaml: 
 				SPACK_USER_CONFIG_PATH=compilers spack config --scope=user add config:install_tree:root:$(CURDIR)/compilers_store
@@ -55,7 +56,7 @@ software/compilers.yaml: compilers/generated/env
 				SPACK_USER_CONFIG_PATH=software spack compiler find --scope=user $$(spack -e compilers find --format '{prefix}' gcc llvm)
 
 software/modules.yaml:
-				SPACK_USER_CONFIG_PATH=software spack config --scope=user add modules:default:tcl:projections:all:'compilers/{compiler.name}-{compiler.version}/{name}/{version}/{hash:4}'
+				SPACK_USER_CONFIG_PATH=software spack config --scope=user add modules:default:tcl:projections:all:"software/{compiler.name}-{compiler.version}/{name}/{version}/{hash:4}"
 
 software/config.yaml:
 				SPACK_USER_CONFIG_PATH=software spack config --scope=user add config:install_tree:root:$(CURDIR)/software_store
