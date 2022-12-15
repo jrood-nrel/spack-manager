@@ -6,6 +6,10 @@ import shutil
 
 class Hypre2(bHypre):
 
+    git = "https://github.com/jrood-nrel/hypre.git"
+
+    version("develop", branch="mangled_july_2023")
+
     phases = ["autoreconf", "distclean", "configure", "clean", "build", "install"]
 
     variant("gpu-aware-mpi", default=False, description="Use gpu-aware mpi")

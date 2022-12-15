@@ -21,7 +21,9 @@ def trilinos_version_filter(name):
         return "stable"
 
 class NaluWind(SMCMakeExtension, bNaluWind, ROCmPackage):
-    version("master", branch="master", submodules=True)
+    git = "https://github.com/jrood-nrel/nalu-wind.git"
+
+    version("master", branch="mangled_july_2023", submodules=True)
 
     variant("asan", default=False,
             description="Turn on address sanitizer")
@@ -52,6 +54,7 @@ class NaluWind(SMCMakeExtension, bNaluWind, ROCmPackage):
     depends_on("hypre+umpire", when="+umpire")
     depends_on("trilinos gotype=long")
     depends_on("openfast@fsi+netcdf+cxx", when="+fsi")
+    depends_on("hypre2@2.18.2: ~int64+mpi~superlu-dist~shared", when="+hypre2")
 
     for _arch in ROCmPackage.amdgpu_targets:
         depends_on("trilinos@13.4.0.2022.10.27: ~shared+exodus+tpetra+zoltan+stk+boost~superlu-dist~superlu+hdf5+shards~hypre+gtest+rocm amdgpu_target={0}".format(_arch),
@@ -109,8 +112,8 @@ class NaluWind(SMCMakeExtension, bNaluWind, ROCmPackage):
             targets = spec.variants["amdgpu_target"].value
             cmake_options.append(self.define("GPU_TARGETS", ";".join(str(x) for x in targets)))
 
+        cmake_options.append(self.define_from_variant("ENABLE_HYPRE", "hypre2"))
         if "+hypre2" in spec:
-            cmake_options.append(self.define("ENABLE_HYPRE", True))
             cmake_options.append(self.define("HYPRE_DIR", spec["hypre2"].prefix))
 
         if spec["mpi"].name == "openmpi":
