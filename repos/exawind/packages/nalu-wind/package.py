@@ -23,7 +23,7 @@ def trilinos_version_filter(name):
 class NaluWind(SMCMakeExtension, bNaluWind, ROCmPackage):
     git = "https://github.com/jrood-nrel/nalu-wind.git"
 
-    version("master", branch="mangled_july_2023", submodules=True)
+    version("master", branch="mangled3", submodules=True)
 
     variant("asan", default=False,
             description="Turn on address sanitizer")
@@ -112,9 +112,9 @@ class NaluWind(SMCMakeExtension, bNaluWind, ROCmPackage):
             targets = spec.variants["amdgpu_target"].value
             cmake_options.append(self.define("GPU_TARGETS", ";".join(str(x) for x in targets)))
 
-        cmake_options.append(self.define_from_variant("ENABLE_HYPRE", "hypre2"))
+        cmake_options.append(self.define_from_variant("ENABLE_NALU_HYPRE", "hypre2"))
         if "+hypre2" in spec:
-            cmake_options.append(self.define("HYPRE_DIR", spec["hypre2"].prefix))
+            cmake_options.append(self.define("NALU_HYPRE_DIR", spec["hypre2"].prefix))
 
         if spec["mpi"].name == "openmpi":
             cmake_options.append(self.define("MPIEXEC_PREFLAGS", "--oversubscribe"))
