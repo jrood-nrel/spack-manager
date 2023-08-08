@@ -23,7 +23,7 @@ def trilinos_version_filter(name):
 class NaluWind(SMCMakeExtension, bNaluWind, ROCmPackage):
     git = "https://github.com/jrood-nrel/nalu-wind.git"
 
-    version("master", branch="mangled_july_2023", submodules=True)
+    version("master", branch="mangled_july_2023", submodules=False)
 
     variant("asan", default=False,
             description="Turn on address sanitizer")

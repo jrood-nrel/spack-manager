@@ -51,6 +51,8 @@ else
 fi
 
 printf "\nActivating Spack environment...\n"
+#cmd "spack uninstall -a -y -f" || true
+#cmd "sm-clean" || true
 cmd "spack env activate -d ${SPACK_MANAGER}/environments/exawind-${SPACK_MANAGER_MACHINE}"
 
 # This should happen automatically with no compilers so we could probably remove this
