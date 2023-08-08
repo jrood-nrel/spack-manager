@@ -16,7 +16,7 @@ class Exawind(SMCMakeExtension, CudaPackage, ROCmPackage):
     """Multi-application driver for Exawind project."""
 
     homepage = "https://github.com/Exawind/exawind-driver"
-    git = "https://github.com/Exawind/exawind-driver.git"
+    git = "https://github.com/jrood-nrel/exawind-driver.git"
 
     maintainers = ["jrood-nrel"]
 
@@ -24,7 +24,7 @@ class Exawind(SMCMakeExtension, CudaPackage, ROCmPackage):
 
     # Testing is currently always enabled, but should be optional in the future
     # to avoid cloning the mesh submodule
-    version("master", branch="main", submodules=False)
+    version("master", branch="mangled_july_2023", submodules=False)
 
     variant("asan", default=False,
             description="turn on address sanitizer")
