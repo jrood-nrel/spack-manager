@@ -1,0 +1,26 @@
+diff --git a/src/config/configure.in b/src/config/configure.in
+index 705a0e0fe..aa7f4d70f 100644
+--- a/src/config/configure.in
++++ b/src/config/configure.in
+@@ -2739,7 +2739,7 @@ AS_IF([test x"$hypre_using_sycl" == x"yes"],
+         LINK_CC=${CUCC}
+         LINK_CXX=${CUCC}
+ 
+-        SYCLFLAGS="-fsycl -fsycl-unnamed-lambda"
++        SYCLFLAGS="-fsycl -fsycl-unnamed-lambda -fPIC"
+         if test "$hypre_using_debug" = "yes"
+         then
+            dnl WM: remove the -g flag for debug mode because it currently causes errors on JLSE
+diff --git a/src/configure b/src/configure
+index 2281d6295..606e78bf4 100755
+--- a/src/configure
++++ b/src/configure
+@@ -10991,7 +10991,7 @@ printf "%s\n" "#define HYPRE_USING_SYCL 1" >>confdefs.h
+                 LINK_CC=${CUCC}
+         LINK_CXX=${CUCC}
+ 
+-        SYCLFLAGS="-fsycl -fsycl-unnamed-lambda"
++        SYCLFLAGS="-fsycl -fsycl-unnamed-lambda -fPIC"
+         if test "$hypre_using_debug" = "yes"
+         then
+                       SYCLFLAGS="-Wall ${SYCLFLAGS}"
