@@ -23,6 +23,8 @@ class Hypre(bHypre):
     depends_on("umpire+cuda", when="+umpire+cuda")
     depends_on("rocprim", when="+rocm")
 
+    patch("sycl.patch", when="+sycl")
+
     def distclean(self, spec, prefix):
         with working_dir("src"):
             if "SPACK_MANAGER_CLEAN_HYPRE" in os.environ:

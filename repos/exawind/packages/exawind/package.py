@@ -16,7 +16,7 @@ class Exawind(SMCMakeExtension, CudaPackage, ROCmPackage):
     """Multi-application driver for Exawind project."""
 
     homepage = "https://github.com/Exawind/exawind-driver"
-    git = "https://github.com/Exawind/exawind-driver.git"
+    git = "https://github.com/jrood-nrel/exawind-driver.git"
 
     maintainers = ["jrood-nrel"]
 
@@ -24,7 +24,7 @@ class Exawind(SMCMakeExtension, CudaPackage, ROCmPackage):
 
     # Testing is currently always enabled, but should be optional in the future
     # to avoid cloning the mesh submodule
-    version("master", branch="main", submodules=True)
+    version("master", branch="mangled_july_2023", submodules=False)
 
     variant("asan", default=False,
             description="turn on address sanitizer")
@@ -52,6 +52,8 @@ class Exawind(SMCMakeExtension, CudaPackage, ROCmPackage):
     conflicts("+amr_wind_gpu", when="~cuda~rocm~sycl")
     conflicts("+nalu_wind_gpu", when="~cuda~rocm")
     conflicts("+nalu_wind_gpu", when="+sycl")
+    #conflicts("+amr_wind_gpu~nalu_wind_gpu", when="^amr-wind+hypre ^nalu-wind+hypre")
+    #conflicts("~amr_wind_gpu+nalu_wind_gpu", when="^amr-wind+hypre ^nalu-wind+hypre")
 
     for arch in CudaPackage.cuda_arch_values:
         depends_on("amr-wind+cuda cuda_arch=%s" % arch, when="+amr_wind_gpu+cuda cuda_arch=%s" % arch)

@@ -4,7 +4,7 @@ packages:
   amr-wind:
     variants: +tiny_profile
   conduit:
-    variants: ~fortran~hdf5_compat
+    variants: ~fortran~hdf5_compat build_type=Release
   boost:
     version: [1.76.0]
     variants: cxxstd=17

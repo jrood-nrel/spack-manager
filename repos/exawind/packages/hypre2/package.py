@@ -6,6 +6,10 @@ import shutil
 
 class Hypre2(bHypre):
 
+    git = "https://github.com/jrood-nrel/hypre.git"
+
+    version("develop", branch="mangled_july_2023")
+
     phases = ["autoreconf", "distclean", "configure", "clean", "build", "install"]
 
     variant("gpu-aware-mpi", default=False, description="Use gpu-aware mpi")
@@ -64,3 +68,21 @@ class Hypre2(bHypre):
                 options.remove("--enable-device-memory-pool")
 
         return options
+
+    @property
+    def headers(self):
+        """Export the main hypre header, NALU_HYPRE.h; all other headers can be found
+        in the same directory.
+        Sample usage: spec['hypre2'].headers.cpp_flags
+        """
+        hdrs = find_headers("NALU_HYPRE", self.prefix.include, recursive=False)
+        return hdrs or None
+    
+    @property
+    def libs(self):
+        """Export the hypre library.
+        Sample usage: spec['hypre2'].libs.ld_flags
+        """
+        is_shared = "+shared" in self.spec
+        libs = find_libraries("libNALU_HYPRE", root=self.prefix, shared=is_shared, recursive=True)
+        return libs or None
