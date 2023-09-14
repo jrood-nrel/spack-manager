@@ -4,24 +4,25 @@ compilers:
       paths:
         cc: cc
         cxx: CC
-        f77: ftn
-        fc: ftn
-      flags: {}
+        f77: /opt/cray/pe/gcc/12.2.0/bin/gfortran
+        fc: /opt/cray/pe/gcc/12.2.0/bin/gfortran
       operating_system: sles15
       target: any
       modules:
-        - PrgEnv-cray-amd/8.4.0
-        - PrgEnv-cray/8.3.3
-        - libfabric/1.15.2.0
-        - cce/15.0.0
-        - DefApps/default
-        - cray-dsmml/0.2.2
-        - craype-network-ofi
-        - amd-mixed/5.4.3
-        - cray-mpich/8.1.23
-        - craype-x86-trento
-        - craype/2.7.19
-        - cray-libsci/22.12.1.1
+       - PrgEnv-gnu-amd/8.4.0
+       - PrgEnv-gnu/8.3.3
+       - gcc/12.2.0
+       - craype-x86-trento
+       - cray-libsci/22.12.1.1
+       - libfabric/1.15.2.0
+       - craype-network-ofi
+       - cray-python/3.9.13.1
+       - DefApps/default
+       - amd-mixed/5.4.3
+       - craype/2.7.19
+       - cray-dsmml/0.2.2
+       - cray-pmi/6.1.8
+       - cray-mpich/8.1.23
       extra_rpaths: []
       environment:
         prepend_path:
