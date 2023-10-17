@@ -24,6 +24,7 @@ class NaluWind(SMCMakeExtension, bNaluWind, ROCmPackage):
     git = "https://github.com/jrood-nrel/nalu-wind.git"
 
     version("master", branch="mangled_july_2023", submodules=False)
+    #version("multiphase", branch="multiphase_dev", submodules=True)
 
     variant("asan", default=False,
             description="Turn on address sanitizer")
