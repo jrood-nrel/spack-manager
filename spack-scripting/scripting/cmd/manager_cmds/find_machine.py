@@ -85,6 +85,7 @@ machine_list = {
         lambda: os.environ["LMOD_SYSTEM_NAME"] == "frontier", "frontier.olcf.ornl.gov"
     ),
     # ANL
+    "aurora": MachineData(lambda: "aurora" in os.environ["HOST"], "aurora.alcf.anl.gov"),
     "arcticus": MachineData(lambda: is_jlse(socket.gethostname()), "arcticus.alcf.anl.gov"),
     "sunspot": MachineData(
         lambda: os.environ["AURORA_BASE_ENV"] == "2023.1.1-scikit", "sunspot.alcf.anl.gov"

@@ -42,6 +42,7 @@ if [ "${SPACK_MANAGER_MACHINE}" == 'eagle' ] || \
    [ "${SPACK_MANAGER_MACHINE}" == 'spock' ] || \
    [ "${SPACK_MANAGER_MACHINE}" == 'crusher' ] || \
    [ "${SPACK_MANAGER_MACHINE}" == 'frontier' ] || \
+   [ "${SPACK_MANAGER_MACHINE}" == 'aurora' ] || \
    [ "${SPACK_MANAGER_MACHINE}" == 'sunspot' ] || \
    [ "${SPACK_MANAGER_MACHINE}" == 'perlmutter' ] || \
    [ "${SPACK_MANAGER_MACHINE}" == 'kestrel' ] || \
