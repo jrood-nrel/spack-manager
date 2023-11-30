@@ -1,19 +1,20 @@
 compilers:
   - compiler:
-      spec: intel@2022.12.30
+      spec: oneapi@2023.05.15
       paths:
-        cc: /soft/restricted/CNDA/updates/2022.12.30.001/oneapi/compiler/trunk-20230201/compiler/linux/bin/icx
-        cxx: /soft/restricted/CNDA/updates/2022.12.30.001/oneapi/compiler/trunk-20230201/compiler/linux/bin/icpx
-        f77: /soft/restricted/CNDA/updates/2022.12.30.001/oneapi/compiler/trunk-20230201/compiler/linux/bin/ifx
-        fc: /soft/restricted/CNDA/updates/2022.12.30.001/oneapi/compiler/trunk-20230201/compiler/linux/bin/ifx
+        cc: /soft/restricted/CNDA/updates/2023.05.15.001/oneapi/compiler/eng-20230512/compiler/linux/bin/icx
+        cxx: /soft/restricted/CNDA/updates/2023.05.15.001/oneapi/compiler/eng-20230512/compiler/linux/bin/icpx
+        f77: /soft/restricted/CNDA/updates/2023.05.15.001/oneapi/compiler/eng-20230512/compiler/linux/bin/ifx
+        fc: /soft/restricted/CNDA/updates/2023.05.15.001/oneapi/compiler/eng-20230512/compiler/linux/bin/ifx
       flags: {}
       operating_system: sles15
-      target: x86_64
+      target: any
       modules: 
-        - gcc/11.2.0
-        - oneapi/eng-compiler/2022.12.30.003
+        - oneapi/eng-compiler/2023.05.15.006
         - mpich/51.2/icc-all-pmix-gpu
-        - libfabric/1.15.2.0
-        - intel_compute_runtime/release/agama-devel-551
-      environment: {}
+        - libfabric
+        - intel_compute_runtime/release/agama-devel-647
+      environment:
+        set:
+          DPLROOT: /lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/oneDPL
       extra_rpaths: []

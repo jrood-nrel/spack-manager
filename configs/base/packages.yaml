@@ -30,7 +30,7 @@ packages:
   perl:
     require: "@5.34.1"
   tioga:
-    version: [develop]
+    require: "@develop"
   hypre:
     require: "@develop"
     variants: ~fortran

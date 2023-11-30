@@ -1,0 +1,46 @@
+diff --git a/var/spack/repos/builtin/packages/hypre/package.py b/var/spack/repos/builtin/packages/hypre/package.py
+index a15db12e16..b03e918e6c 100644
+--- a/var/spack/repos/builtin/packages/hypre/package.py
++++ b/var/spack/repos/builtin/packages/hypre/package.py
+@@ -260,7 +260,7 @@ def configure_args(self):
+             configure_args.extend(["--without-hip", "--disable-rocrand", "--disable-rocsparse"])
+ 
+         if "+sycl" in spec:
+-            configure_args.append("--with-scyl")
++            configure_args.append("--with-sycl")
+             sycl_compatible_compilers = ["dpcpp", "icpx"]
+             if not (os.path.basename(self.compiler.cxx) in sycl_compatible_compilers):
+                 raise InstallError(
+@@ -295,6 +295,9 @@ def setup_build_environment(self, env):
+             env.unset("CFLAGS")
+             env.unset("CXXFLAGS")
+ 
++        if "+sycl" in spec:
++            env.append_flags("SYCLFLAGS", self.compiler.cxx_pic_flag)
++
+     def build(self, spec, prefix):
+         with working_dir("src"):
+             make()
+diff --git a/var/spack/repos/builtin/packages/nalu-wind/package.py b/var/spack/repos/builtin/packages/nalu-wind/package.py
+index 9e1944f362..0a0697842b 100644
+--- a/var/spack/repos/builtin/packages/nalu-wind/package.py
++++ b/var/spack/repos/builtin/packages/nalu-wind/package.py
+@@ -64,10 +64,6 @@ class NaluWind(CMakePackage, CudaPackage):
+     depends_on("tioga@master:", when="+tioga")
+     depends_on("hypre@2.18.2: ~int64+mpi~superlu-dist", when="+hypre")
+     depends_on("trilinos+muelu+belos+amesos2+ifpack2", when="+trilinos-solvers")
+-    conflicts(
+-        "~hypre~trilinos-solvers",
+-        msg="nalu-wind: Must enable at least one of the linear-solvers: hypre or trilinos-solvers",
+-    )
+     depends_on("kokkos-nvcc-wrapper", type="build", when="+cuda")
+     for _arch in CudaPackage.cuda_arch_values:
+         depends_on(
+@@ -80,7 +76,6 @@ class NaluWind(CMakePackage, CudaPackage):
+         )
+     depends_on("trilinos-catalyst-ioss-adapter", when="+catalyst")
+     depends_on("fftw+mpi", when="+fftw")
+-    depends_on("nccmp")
+     # indirect dependency needed to make original concretizer work
+     depends_on("netcdf-c+parallel-netcdf")
+     depends_on("boost +filesystem +iostreams cxxstd=14", when="+boost")

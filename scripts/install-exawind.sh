@@ -36,6 +36,12 @@ if [[ -f "${ENV_SCRIPT}" ]]; then
   cmd "source ${ENV_SCRIPT}"
 fi
 
+printf "\nPatching Spack for ${SPACK_MANAGER_MACHINE}...\n"
+PATCH=${SPACK_MANAGER}/configs/${SPACK_MANAGER_MACHINE}/${SPACK_MANAGER_MACHINE}.patch
+if [[ -f "${ENV_SCRIPT}" ]]; then
+  cmd "cd ${SPACK_MANAGER}/spack && git apply ${PATCH} && cd -"
+fi
+
 printf "\nCreating Spack environment...\n"
 if [ "${SPACK_MANAGER_MACHINE}" == 'eagle' ] || \
    [ "${SPACK_MANAGER_MACHINE}" == 'summit' ] || \
