@@ -7,6 +7,8 @@ packages:
         prefix: /soft/restricted/CNDA/updates/mpich/51.2/mpich-ofi-all-icc-default-pmix-gpu-drop51
         modules:
           - mpich/51.2/icc-all-pmix-gpu
+          - cray-libpals
+          - cray-pals
   nalu-wind:
     require: "~trilinos-solvers"
   amr-wind:

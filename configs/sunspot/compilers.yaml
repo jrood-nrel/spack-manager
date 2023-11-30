@@ -10,8 +10,11 @@ compilers:
       operating_system: sles15
       target: any
       modules: 
+        - gcc/11.2.0
         - oneapi/eng-compiler/2023.05.15.006
         - mpich/51.2/icc-all-pmix-gpu
+        - cray-libpals
+        - cray-pals
         - libfabric
         - intel_compute_runtime/release/agama-devel-647
       environment:
