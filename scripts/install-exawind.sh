@@ -38,7 +38,7 @@ fi
 
 printf "\nPatching Spack for ${SPACK_MANAGER_MACHINE}...\n"
 PATCH=${SPACK_MANAGER}/configs/${SPACK_MANAGER_MACHINE}/spack.patch
-if [ -f "${ENV_SCRIPT}" ]; then
+if [ -f "${PATCH}" ]; then
   cmd "cd ${SPACK_MANAGER}/spack && git apply ${PATCH} && cd -"
 fi
 
