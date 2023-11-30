@@ -15,5 +15,7 @@ compilers:
         - mpich/51.2/icc-all-pmix-gpu
         - libfabric/1.15.2.0
         - intel_compute_runtime/release/agama-devel-551
-      environment: {}
+      environment:
+        set:
+          DPLROOT: /lus/gecko/projects/CSC249ADSE13_CNDA/rood/exawind/oneDPL
       extra_rpaths: []
