@@ -32,13 +32,13 @@ printf "\nMachine detected as: ${SPACK_MANAGER_MACHINE}\n"
 
 printf "\nSetting up recommended environment for ${SPACK_MANAGER_MACHINE}...\n"
 ENV_SCRIPT=${SPACK_MANAGER}/configs/${SPACK_MANAGER_MACHINE}/env.sh
-if [[ -f "${ENV_SCRIPT}" ]]; then
+if [ -f "${ENV_SCRIPT}" ]; then
   cmd "source ${ENV_SCRIPT}"
 fi
 
 printf "\nPatching Spack for ${SPACK_MANAGER_MACHINE}...\n"
-PATCH=${SPACK_MANAGER}/configs/${SPACK_MANAGER_MACHINE}/${SPACK_MANAGER_MACHINE}.patch
-if [[ -f "${ENV_SCRIPT}" ]]; then
+PATCH=${SPACK_MANAGER}/configs/${SPACK_MANAGER_MACHINE}/spack.patch
+if [ -f "${ENV_SCRIPT}" ]; then
   cmd "cd ${SPACK_MANAGER}/spack && git apply ${PATCH} && cd -"
 fi
 
