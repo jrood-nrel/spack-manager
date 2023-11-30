@@ -39,7 +39,7 @@ fi
 printf "\nPatching Spack for ${SPACK_MANAGER_MACHINE}...\n"
 PATCH=${SPACK_MANAGER}/configs/${SPACK_MANAGER_MACHINE}/spack.patch
 if [ -f "${PATCH}" ]; then
-  cmd "cd ${SPACK_MANAGER}/spack && git apply ${PATCH} && cd -"
+  (set -x; cd ${SPACK_MANAGER}/spack && git apply ${PATCH} || true)
 fi
 
 printf "\nCreating Spack environment...\n"
