@@ -21,6 +21,19 @@ index a15db12e16..b03e918e6c 100644
      def build(self, spec, prefix):
          with working_dir("src"):
              make()
+diff --git a/var/spack/repos/builtin/packages/libffi/package.py b/var/spack/repos/builtin/packages/libffi/package.py
+index 2526b615b7..e0ebe0056b 100644
+--- a/var/spack/repos/builtin/packages/libffi/package.py
++++ b/var/spack/repos/builtin/packages/libffi/package.py
+@@ -40,7 +40,7 @@ def headers(self):
+ 
+     def flag_handler(self, name, flags):
+         if name == "cflags":
+-            if self.spec.satisfies("%oneapi@2023:") or self.spec.satisfies("%arm@23.04:"):
++            if self.spec.satisfies("%oneapi") or self.spec.satisfies("%arm@23.04:"):
+                 flags.append("-Wno-error=implicit-function-declaration")
+         return (flags, None, None)
+ 
 diff --git a/var/spack/repos/builtin/packages/nalu-wind/package.py b/var/spack/repos/builtin/packages/nalu-wind/package.py
 index 9e1944f362..0a0697842b 100644
 --- a/var/spack/repos/builtin/packages/nalu-wind/package.py

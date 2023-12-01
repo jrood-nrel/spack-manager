@@ -1,0 +1,52 @@
+diff --git a/src/config/configure.in b/src/config/configure.in
+index 705a0e0fe..4a6fc61d6 100644
+--- a/src/config/configure.in
++++ b/src/config/configure.in
+@@ -2739,7 +2739,7 @@ AS_IF([test x"$hypre_using_sycl" == x"yes"],
+         LINK_CC=${CUCC}
+         LINK_CXX=${CUCC}
+ 
+-        SYCLFLAGS="-fsycl -fsycl-unnamed-lambda"
++        SYCLFLAGS="-fsycl -fsycl-unnamed-lambda -fPIC"
+         if test "$hypre_using_debug" = "yes"
+         then
+            dnl WM: remove the -g flag for debug mode because it currently causes errors on JLSE
+@@ -2747,7 +2747,7 @@ AS_IF([test x"$hypre_using_sycl" == x"yes"],
+         else
+            SYCLFLAGS="-O3 ${SYCLFLAGS}"
+         fi
+-        LDFLAGS+=" -fsycl -fsycl-device-code-split=per_kernel -Wl,--no-relax"
++        LDFLAGS+=" -fsycl -fsycl-device-code-split=per_kernel -Wl,--no-relax -lstdc++ -lmpi"
+ 
+         dnl AOT compilation for specific devices
+         if test "x${HYPRE_SYCL_TARGET}" != "x"
+@@ -2862,7 +2862,7 @@ then
+    then
+       if [test "$CUCC" = "icx" || test "$CUCC" = "icpx" || test "$CUCC" = "mpiicx" || test "$CUCC" = "mpiicpx"]
+       then
+-         LDFLAGS+="-qopenmp -fopenmp-targets=spir64"
++         LDFLAGS+="-qopenmp -fopenmp-targets=spir64 -lstdc++ -lmpi"
+       fi
+    fi
+ 
+diff --git a/src/configure b/src/configure
+index 2281d6295..3640be2f1 100755
+--- a/src/configure
++++ b/src/configure
+@@ -10991,14 +10991,14 @@ printf "%s\n" "#define HYPRE_USING_SYCL 1" >>confdefs.h
+                 LINK_CC=${CUCC}
+         LINK_CXX=${CUCC}
+ 
+-        SYCLFLAGS="-fsycl -fsycl-unnamed-lambda"
++        SYCLFLAGS="-fsycl -fsycl-unnamed-lambda -fPIC"
+         if test "$hypre_using_debug" = "yes"
+         then
+                       SYCLFLAGS="-Wall ${SYCLFLAGS}"
+         else
+            SYCLFLAGS="-O3 ${SYCLFLAGS}"
+         fi
+-        LDFLAGS+=" -fsycl -fsycl-device-code-split=per_kernel -Wl,--no-relax"
++        LDFLAGS+=" -fsycl -fsycl-device-code-split=per_kernel -Wl,--no-relax -lstdc++ -lmpi"
+ 
+                 if test "x${HYPRE_SYCL_TARGET}" != "x"
+         then

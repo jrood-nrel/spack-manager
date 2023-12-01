@@ -22,6 +22,7 @@ class Hypre(bHypre):
     depends_on("rocprim", when="+rocm")
 
     patch("sycl.patch", when="+sycl")
+    patch("sycl_mpi.patch", when="+sycl+mpi")
 
     def distclean(self, spec, prefix):
         with working_dir("src"):
