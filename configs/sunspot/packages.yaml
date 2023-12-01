@@ -18,6 +18,12 @@ packages:
   boost:
     version: [1.78.0]
     variants: ~shared+pic
+  openssl:
+    require: "@1.1.1u"
+    buildable: false
+    externals:
+      - spec: "openssl@1.1.1u"
+        prefix: /usr
   all:
     compiler: [oneapi]
     variants: build_type=Release

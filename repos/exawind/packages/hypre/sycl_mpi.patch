@@ -1,5 +1,5 @@
 diff --git a/src/config/configure.in b/src/config/configure.in
-index 705a0e0fe..4a6fc61d6 100644
+index 705a0e0fe..c6e96a14e 100644
 --- a/src/config/configure.in
 +++ b/src/config/configure.in
 @@ -2739,7 +2739,7 @@ AS_IF([test x"$hypre_using_sycl" == x"yes"],
@@ -30,7 +30,7 @@ index 705a0e0fe..4a6fc61d6 100644
     fi
  
 diff --git a/src/configure b/src/configure
-index 2281d6295..3640be2f1 100755
+index 2281d6295..b4955013c 100755
 --- a/src/configure
 +++ b/src/configure
 @@ -10991,14 +10991,14 @@ printf "%s\n" "#define HYPRE_USING_SYCL 1" >>confdefs.h
@@ -50,3 +50,12 @@ index 2281d6295..3640be2f1 100755
  
                  if test "x${HYPRE_SYCL_TARGET}" != "x"
          then
+@@ -11147,7 +11147,7 @@ printf "%s\n" "#define HYPRE_DEVICE_OPENMP_ALLOC 1" >>confdefs.h
+    then
+       if test "$CUCC" = "icx" || test "$CUCC" = "icpx" || test "$CUCC" = "mpiicx" || test "$CUCC" = "mpiicpx"
+       then
+-         LDFLAGS+="-qopenmp -fopenmp-targets=spir64"
++         LDFLAGS+="-qopenmp -fopenmp-targets=spir64 -lstdc++ -lmpi"
+       fi
+    fi
+ 

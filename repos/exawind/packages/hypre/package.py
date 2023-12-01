@@ -21,8 +21,7 @@ class Hypre(bHypre):
     depends_on("umpire+cuda", when="+umpire+cuda")
     depends_on("rocprim", when="+rocm")
 
-    patch("sycl.patch", when="+sycl")
-    patch("sycl_mpi.patch", when="+sycl+mpi")
+    patch("sycl_mpi.patch", when="+sycl+mpi") # Necessary for Aurora
 
     def distclean(self, spec, prefix):
         with working_dir("src"):
