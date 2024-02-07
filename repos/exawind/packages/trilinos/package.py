@@ -36,6 +36,9 @@ class Trilinos(bTrilinos, SMCMakeExtension):
     if find_machine(verbose=False, full_machine_name=False) == "eagle":
         patch("stk-coupling-versions-func-overload.patch", when="@13.3.0:13.4.0.2022.12.15")
 
+    if find_machine(verbose=False, full_machine_name=False) == "aurora":
+        patch("aurora_sycl.patch", when="@13.4.0.2023.02.28")
+
     def setup_build_environment(self, env):
         spec = self.spec
         if "+cuda" in spec and "+wrapper" in spec:
