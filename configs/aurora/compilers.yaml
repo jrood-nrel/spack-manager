@@ -1,22 +1,22 @@
 compilers:
   - compiler:
-      spec: oneapi@2022.12.30
+      spec: oneapi@2024.0
       paths:
-        cc: /opt/aurora/23.073.0/CNDA/oneapi/compiler/trunk-20230201/compiler/linux/bin/icx
-        cxx: /opt/aurora/23.073.0/CNDA/oneapi/compiler/trunk-20230201/compiler/linux/bin/icpx
-        f77: /opt/aurora/23.073.0/CNDA/oneapi/compiler/trunk-20230201/compiler/linux/bin/ifx
-        fc: /opt/aurora/23.073.0/CNDA/oneapi/compiler/trunk-20230201/compiler/linux/bin/ifx
+        cc: /soft/compilers/oneapi/2023.12.15.001/oneapi/compiler/2024.0/bin/icx
+        cxx: /soft/compilers/oneapi/2023.12.15.001/oneapi/compiler/2024.0/bin/icpx
+        f77: /soft/compilers/oneapi/2023.12.15.001/oneapi/compiler/2024.0/bin/ifx
+        fc: /soft/compilers/oneapi/2023.12.15.001/oneapi/compiler/2024.0/bin/ifx
       flags: {}
       operating_system: sles15
       target: any
       modules: 
-        - gcc/11.2.0
-        - oneapi/eng-compiler/2022.12.30.003
-        - mpich/51.2/icc-all-pmix-gpu
-        - cray-libpals
-        - cray-pals
+        - oneapi/release/2023.12.15.001
+        - intel_compute_runtime/release/stable-736.25
+        - cray-pals/1.2.12
+        - mpich/52.2/icc-all-pmix-gpu
+        - gcc/12.2.0
+        - cray-libpals/1.2.12
         - libfabric
-        - intel_compute_runtime/release/agama-devel-551
       environment:
         set:
           DPLROOT: /lus/gecko/projects/CSC249ADSE13_CNDA/rood/exawind/oneDPL
